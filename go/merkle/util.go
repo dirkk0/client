@@ -1,5 +1,11 @@
 package merkle
 
+import (
+	"crypto/sha256"
+
+	merkletree "github.com/keybase/go-merkle-tree"
+)
+
 func ComputeSkipPointers(s int64) []int64 {
 	if s <= 1 {
 		return nil
@@ -40,4 +46,13 @@ func ComputeSkipPath(start int64, end int64) []int64 {
 	}
 
 	return jumps[1:] // ignore end
+}
+
+type SHA256Hasher struct{}
+
+var _ merkletree.Hasher = (*SHA256Hasher)(nil)
+
+func (h SHA256Hasher) Hash(x []byte) merkletree.Hash {
+	y := sha256.Sum256(x)
+	return merkletree.Hash(y[:])
 }

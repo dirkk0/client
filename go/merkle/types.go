@@ -102,3 +102,5 @@ type Path struct {
 	Path        []Block `codec:"p"` // nil if not requested
 	Skips       []Root  `codec:"s"` // nil if not requested
 }
+
+var Cfg = merkletree.NewConfig(SHA256Hasher{}, 2, 4, EncodedLeaf{})
