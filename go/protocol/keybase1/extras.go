@@ -3062,3 +3062,13 @@ func (h *HiddenTeamChain) IsStale() bool {
 	_, fresh := h.Outer[h.LatestSeqnoHint]
 	return !fresh
 }
+
+// IsLimited returns if the network is considered limited based on the type.
+func (s MobileNetworkState) IsLimited() bool {
+	switch s {
+	case MobileNetworkState_WIFI, MobileNetworkState_NOTAVAILABLE:
+		return false
+	default:
+		return true
+	}
+}
