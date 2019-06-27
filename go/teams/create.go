@@ -101,6 +101,7 @@ func CreateImplicitTeam(ctx context.Context, g *libkb.GlobalContext, impTeam key
 		Admins:  &[]SCTeamMember{},
 		Writers: &[]SCTeamMember{},
 		Readers: &[]SCTeamMember{},
+		Bots:    &[]SCTeamMember{},
 	}
 	if len(owners) > 0 {
 		members.Owners = &owners
@@ -310,6 +311,7 @@ func CreateRootTeam(ctx context.Context, g *libkb.GlobalContext, nameString stri
 		Admins:  &[]SCTeamMember{},
 		Writers: &[]SCTeamMember{},
 		Readers: &[]SCTeamMember{},
+		Bots:    &[]SCTeamMember{},
 	}
 
 	var scSettings *SCTeamSettings
@@ -512,6 +514,7 @@ func generateHeadSigForSubteamChain(ctx context.Context, g *libkb.GlobalContext,
 		Admins:  &[]SCTeamMember{},
 		Writers: &[]SCTeamMember{},
 		Readers: &[]SCTeamMember{},
+		Bots:    &[]SCTeamMember{},
 	}
 
 	memSet := newMemberSet()
@@ -532,6 +535,8 @@ func generateHeadSigForSubteamChain(ctx context.Context, g *libkb.GlobalContext,
 			members.Admins = &memList
 		case keybase1.TeamRole_OWNER:
 			return nil, nil, errors.New("Cannot add self as owner to a subteam")
+		case keybase1.TeamRole_BOT:
+			return nil, nil, errors.New("Cannot add self as bot to a subteam")
 		}
 		memSet.loadMember(ctx, g, meUV, true /* store recipient */, false /* force poll */)
 	}
