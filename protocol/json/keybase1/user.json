@@ -664,13 +664,6 @@
           "type": "boolean"
         },
         {
-          "name": "forUID",
-          "type": [
-            null,
-            "UID"
-          ]
-        },
-        {
           "name": "noShortTimeout",
           "type": "boolean"
         }
