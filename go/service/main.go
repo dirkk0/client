@@ -876,7 +876,7 @@ func (d *Service) runBackgroundBoxAuditScheduler() {
 	})
 }
 
-func (d *Service) OnLogin(mctx libkb.MetaContext) (err error) {
+func (d *Service) OnLogin(mctx libkb.MetaContext) error {
 	d.rekeyMaster.Login()
 	if err := d.gregordConnect(); err != nil {
 		return err
