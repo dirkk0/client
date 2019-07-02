@@ -588,6 +588,12 @@ func (s *Stellar) InformBundle(mctx libkb.MetaContext, rev stellar1.BundleRevisi
 	}()
 }
 
+func (s *Stellar) InformDefaultCurrencyChange(mctx libkb.MetaContext) {
+	go func() {
+		s.getBuildPaymentCache().InformDefaultCurrencyChange(mctx)
+	}()
+}
+
 func (s *Stellar) OwnAccountCached(mctx libkb.MetaContext, accountID stellar1.AccountID) (own, isPrimary bool, err error) {
 	err = libkb.AcquireWithContextAndTimeout(mctx.Ctx(), &s.accountsLock, 5*time.Second)
 	if err != nil {
