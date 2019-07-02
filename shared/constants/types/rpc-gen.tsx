@@ -59,6 +59,10 @@ export type MessageTypes = {
     inParam: {readonly id: TeamID; readonly generation: EkGeneration}
     outParam: void
   }
+  'keybase.1.NotifyEphemeral.newTeambotEk': {
+    inParam: {readonly id: TeamID; readonly generation: EkGeneration}
+    outParam: void
+  }
   'keybase.1.NotifyFS.FSActivity': {
     inParam: {readonly notification: FSNotification}
     outParam: void
@@ -2702,6 +2706,7 @@ export type IncomingCallMapType = {
   'keybase.1.NotifyEmailAddress.emailAddressVerified'?: (params: MessageTypes['keybase.1.NotifyEmailAddress.emailAddressVerified']['inParam'] & {sessionID: number}) => IncomingReturn
   'keybase.1.NotifyEmailAddress.emailsChanged'?: (params: MessageTypes['keybase.1.NotifyEmailAddress.emailsChanged']['inParam'] & {sessionID: number}) => IncomingReturn
   'keybase.1.NotifyEphemeral.newTeamEk'?: (params: MessageTypes['keybase.1.NotifyEphemeral.newTeamEk']['inParam'] & {sessionID: number}) => IncomingReturn
+  'keybase.1.NotifyEphemeral.newTeambotEk'?: (params: MessageTypes['keybase.1.NotifyEphemeral.newTeambotEk']['inParam'] & {sessionID: number}) => IncomingReturn
   'keybase.1.NotifyFavorites.favoritesChanged'?: (params: MessageTypes['keybase.1.NotifyFavorites.favoritesChanged']['inParam'] & {sessionID: number}) => IncomingReturn
   'keybase.1.NotifyFS.FSActivity'?: (params: MessageTypes['keybase.1.NotifyFS.FSActivity']['inParam'] & {sessionID: number}) => IncomingReturn
   'keybase.1.NotifyFS.FSPathUpdated'?: (params: MessageTypes['keybase.1.NotifyFS.FSPathUpdated']['inParam'] & {sessionID: number}) => IncomingReturn
@@ -2819,6 +2824,7 @@ export type CustomResponseIncomingCallMap = {
   'keybase.1.NotifyApp.exit'?: (params: MessageTypes['keybase.1.NotifyApp.exit']['inParam'] & {sessionID: number}, response: {error: IncomingErrorCallback; result: (res: MessageTypes['keybase.1.NotifyApp.exit']['outParam']) => void}) => IncomingReturn
   'keybase.1.NotifyEmailAddress.emailAddressVerified'?: (params: MessageTypes['keybase.1.NotifyEmailAddress.emailAddressVerified']['inParam'] & {sessionID: number}, response: {error: IncomingErrorCallback; result: (res: MessageTypes['keybase.1.NotifyEmailAddress.emailAddressVerified']['outParam']) => void}) => IncomingReturn
   'keybase.1.NotifyEmailAddress.emailsChanged'?: (params: MessageTypes['keybase.1.NotifyEmailAddress.emailsChanged']['inParam'] & {sessionID: number}, response: {error: IncomingErrorCallback; result: (res: MessageTypes['keybase.1.NotifyEmailAddress.emailsChanged']['outParam']) => void}) => IncomingReturn
+  'keybase.1.NotifyEphemeral.newTeambotEk'?: (params: MessageTypes['keybase.1.NotifyEphemeral.newTeambotEk']['inParam'] & {sessionID: number}, response: {error: IncomingErrorCallback; result: (res: MessageTypes['keybase.1.NotifyEphemeral.newTeambotEk']['outParam']) => void}) => IncomingReturn
   'keybase.1.NotifyFS.FSSyncActivity'?: (params: MessageTypes['keybase.1.NotifyFS.FSSyncActivity']['inParam'] & {sessionID: number}, response: {error: IncomingErrorCallback; result: (res: MessageTypes['keybase.1.NotifyFS.FSSyncActivity']['outParam']) => void}) => IncomingReturn
   'keybase.1.NotifyFS.FSEditListResponse'?: (params: MessageTypes['keybase.1.NotifyFS.FSEditListResponse']['inParam'] & {sessionID: number}, response: {error: IncomingErrorCallback; result: (res: MessageTypes['keybase.1.NotifyFS.FSEditListResponse']['outParam']) => void}) => IncomingReturn
   'keybase.1.NotifyFS.FSSyncStatusResponse'?: (params: MessageTypes['keybase.1.NotifyFS.FSSyncStatusResponse']['inParam'] & {sessionID: number}, response: {error: IncomingErrorCallback; result: (res: MessageTypes['keybase.1.NotifyFS.FSSyncStatusResponse']['outParam']) => void}) => IncomingReturn
@@ -3250,6 +3256,7 @@ export const userUploadUserAvatarRpcPromise = (params: MessageTypes['keybase.1.u
 // 'keybase.1.NotifyEmailAddress.emailAddressVerified'
 // 'keybase.1.NotifyEmailAddress.emailsChanged'
 // 'keybase.1.NotifyEphemeral.newTeamEk'
+// 'keybase.1.NotifyEphemeral.newTeambotEk'
 // 'keybase.1.NotifyFavorites.favoritesChanged'
 // 'keybase.1.NotifyFS.FSActivity'
 // 'keybase.1.NotifyFS.FSPathUpdated'
