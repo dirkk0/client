@@ -17,8 +17,23 @@ type Block struct {
 type EncodingType byte
 
 const (
-	EncodingTypeBlindedSHA256v1 EncodingType = 1 // p = HMAC-SHA256; (k, v) -> (k, p(p(k, s), v)) where s is a secret unique per Merkle seqno
+	EncodingTypeBlindedSHA256v1     EncodingType = 1 // p = HMAC-SHA256; (k, v) -> (k, p(p(k, s), v)) where s is a secret unique per Merkle seqno
+	EncodingTypeBlindedSHA512_256v1 EncodingType = 2 // p = HMAC-SHA512-256; (k, v) -> (k, p(p(k, s), v)) where s is a secret unique per Merkle seqno
 )
+
+const CurrentEncodingType = EncodingTypeBlindedSHA512_256v1
+
+const MaxChildrenPerLeaf = 1 // Important: otherwise we leak neighboring data
+
+func GetTreeConfig(encodingType EncodingType) (merkletree.Config, error) {
+	switch encodingType {
+	case EncodingTypeBlindedSHA256v1:
+		return merkletree.NewConfig(SHA256Hasher{}, 2, MaxChildrenPerLeaf, EncodedLeaf{}), nil
+	case EncodingTypeBlindedSHA512_256v1:
+		return merkletree.NewConfig(SHA512_256Hasher{}, 2, MaxChildrenPerLeaf, EncodedLeaf{}), nil
+	}
+	return merkletree.Config{}, errors.Errorf("unknown encoding type %q", encodingType)
+}
 
 type EncodedLeaf []byte
 
@@ -102,5 +117,3 @@ type Path struct {
 	Path        []Block `codec:"p"` // nil if not requested
 	Skips       []Root  `codec:"s"` // nil if not requested
 }
-
-var Cfg = merkletree.NewConfig(SHA256Hasher{}, 2, 4, EncodedLeaf{})

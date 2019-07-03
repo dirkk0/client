@@ -2,6 +2,7 @@ package merkle
 
 import (
 	"crypto/sha256"
+	"crypto/sha512"
 
 	merkletree "github.com/keybase/go-merkle-tree"
 )
@@ -54,5 +55,14 @@ var _ merkletree.Hasher = (*SHA256Hasher)(nil)
 
 func (h SHA256Hasher) Hash(x []byte) merkletree.Hash {
 	y := sha256.Sum256(x)
+	return merkletree.Hash(y[:])
+}
+
+type SHA512_256Hasher struct{}
+
+var _ merkletree.Hasher = (*SHA512_256Hasher)(nil)
+
+func (h SHA512_256Hasher) Hash(x []byte) merkletree.Hash {
+	y := sha512.Sum512_256(x)
 	return merkletree.Hash(y[:])
 }
