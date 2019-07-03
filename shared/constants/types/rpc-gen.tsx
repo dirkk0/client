@@ -1987,6 +1987,7 @@ export enum StatusCode {
   scephemeralmemberafterek = 2907,
   scephemeraldevicestale = 2908,
   scephemeraluserstale = 2909,
+  scephemeralteambotgenerationexists = 2910,
   scstellarerror = 3100,
   scstellarbadinput = 3101,
   scstellarwrongrevision = 3102,
